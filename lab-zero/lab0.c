@@ -8,7 +8,8 @@
 int main(void)
 {
     int sum = 0, i = 0;
-    while (i < 200) {
+    while (i < 200)
+    {
         sum += i;
         i += 2;
     }
