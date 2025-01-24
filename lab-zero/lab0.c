@@ -13,6 +13,6 @@ int main(void)
         i += 2;
     }
     printf("Hello, World!\n");
-    printf("sum: %d\n", sum);
+    printf("%d\n", sum);
     return 0;
 }
