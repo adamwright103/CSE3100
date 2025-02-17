@@ -8,10 +8,10 @@
       "name": "GDB Debug",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/hw-two/oddSum", // Path to the compiled executable
-      "args": [],
+      "program": "${workspaceFolder}/hw/hw-three/diffusion", // Path to the compiled executable
+      "args": ["2", "1"],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}/hw-two",
+      "cwd": "${workspaceFolder}/hw/hw-three",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
