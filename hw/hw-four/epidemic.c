@@ -58,7 +58,7 @@ void add_first(node **head, node *newnode)
 node *remove_first(node **head)
 {
   node *first = *head;
-  if (*head == NULL)
+  if (first == NULL)
   {
     return NULL;
   }
@@ -92,7 +92,7 @@ int location_match(node *head, THost host)
   {
     return 0;
   }
-  while (it_node->next != NULL)
+  while (it_node != NULL)
   {
     if (it_node->host.x == host.x && it_node->host.y == host.y)
     {
@@ -153,22 +153,28 @@ int one_round(THost *hosts, int m, node *p_arr[], int n_arr, int k, int T)
 
         // host is succeptible, and in same spot as an infected so infect
         hosts[i].type = I;
-        hosts[i].t = T;
+        hosts[i].t = 0;
       }
     }
     else if (hosts[i].type == I)
     {
       // TODO: fill in what should happen here (not long)
 
-      // recover host or decrement time to recovery
-      hosts[i].t == 0
-          ? hosts[i].type = R
-          : hosts[i].t--;
+      // ]increase time infected and check if ready to recover
+      hosts[i].t++;
+      if (hosts[i].t >= T)
+      {
+        hosts[i].type = R;
+      }
     }
   }
 
   // TODO: fill in code below
   // reset all linked lists
+  for (int i = 0; i < n_arr; i++)
+  {
+    remove_all(&p_arr[i]);
+  }
 
   for (int i = 0; i < m; i++)
   {
@@ -182,16 +188,16 @@ int one_round(THost *hosts, int m, node *p_arr[], int n_arr, int k, int T)
     switch (r)
     {
     case 0:
-      hosts[i].y = (y != -k) ? y - 1 : k;
+      hosts[i].y = (y == k) ? -k : y + 1;
       break;
     case 1:
-      hosts[i].x = (x != k) ? x + 1 : -k;
+      hosts[i].x = (x == k) ? -k : x + 1;
       break;
     case 2:
-      hosts[i].y = (y != k) ? y + 1 : -k;
+      hosts[i].y = (y == -k) ? k : y - 1;
       break;
     case 3:
-      hosts[i].x = (x != -k) ? x - 1 : k;
+      hosts[i].x = (x == -k) ? k : x - 1;
       break;
     }
 
