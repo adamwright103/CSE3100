@@ -8,10 +8,10 @@
       "name": "GDB Debug",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/lab/lab-four/linkedlist-main", // Path to the compiled executable
-      "args": ["1", "2", "3", "4", "5"],
+      "program": "${workspaceFolder}/exams/prac-one/calculator", // Path to the compiled executable
+      "args": ["1234", "766"],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}/lab/lab-four/",
+      "cwd": "${workspaceFolder}/exams/prac-one",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
