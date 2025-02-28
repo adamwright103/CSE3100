@@ -8,10 +8,10 @@
       "name": "GDB Debug",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/exams/prac-one/calculator", // Path to the compiled executable
-      "args": ["1234", "766"],
+      "program": "${workspaceFolder}/exams/exam-one/freq", // Path to the compiled executable
+      "args": ["3"],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}/exams/prac-one",
+      "cwd": "${workspaceFolder}/exams/exam-one",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",

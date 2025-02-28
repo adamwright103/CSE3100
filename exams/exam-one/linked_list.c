@@ -23,13 +23,12 @@ void insert(node **head, node *newnode)
     return;
   }
   node *p = (*head);
-  node *q = p;
+  // node *q = p; not used in my implementation
   while (p->next != NULL && newnode->v > p->v)
   {
     // fill in code below
 
     // itterate to find node just before wehere we want to insert
-    q = p;
     p = p->next;
   }
   if (newnode->v > p->v)
@@ -182,6 +181,14 @@ int main(int argc, char *argv[])
 
   // TODO
   // fill in code below
+
+  // free all allocated nodes
+  for (int i = 0; i < 2 * n; i++)
+  {
+    node *next = p ? p->next : NULL; // just incase
+    free(p);
+    p = next;
+  }
 
   return 0;
 }
