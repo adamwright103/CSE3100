@@ -8,10 +8,10 @@
       "name": "GDB Debug",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/exams/exam-one/freq", // Path to the compiled executable
-      "args": ["3"],
+      "program": "${workspaceFolder}/hw/hw-five/decrypt", // Path to the compiled executable
+      "args": ["encrypted-message2"],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}/exams/exam-one",
+      "cwd": "${workspaceFolder}/hw/hw-five/",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",

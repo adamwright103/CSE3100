@@ -41,46 +41,35 @@ void read_file_to_array(char *filename)
 // Return 0 otherwise
 // Be efficient in implementing this function
 // Efficiency is needed to pass test cases in limited time
-// int in_dict(char *word)
-// {
-//   // have a pointer at start and end
-//   // move pointers based on word at middle of 2 ptrs
-//   int left = 0;
-//   int right = word_count - 1;
-
-//   while (left <= right)
-//   {
-//     int mid = left + (right - left) / 2;
-//     int cmp = strcmp(word, words[mid]);
-
-//     if (cmp == 0)
-//     {
-//       return 1; // Word found
-//     }
-//     else if (cmp < 0)
-//     {
-//       // if the first non-matching character in str1 is greater (in ASCII) than that of str2
-//       right = mid - 1;
-//     }
-//     else
-//     {
-//       // if the first non-matching character in str1 is lower (in ASCII) than that of str2
-//       left = mid + 1;
-//     }
-//   }
-
-//   // Word not found
-//   return 0;
-// }
 int in_dict(char *word)
 {
-  for (int i = 0; i < word_count; i++)
+  // have a pointer at start and end
+  // move pointers based on word at middle of 2 ptrs
+  int left = 0;
+  int right = word_count - 1;
+
+  while (left <= right)
   {
-    if (strcmp(word, words[i]) == 0)
+    int mid = left + (right - left) / 2;
+    int cmp = strcmp(word, words[mid]);
+
+    if (cmp == 0)
     {
-      return 1;
+      return 1; // Word found
+    }
+    else if (cmp < 0)
+    {
+      // if the first non-matching character in str1 is greater (in ASCII) than that of str2
+      right = mid - 1;
+    }
+    else
+    {
+      // if the first non-matching character in str1 is lower (in ASCII) than that of str2
+      left = mid + 1;
     }
   }
+
+  // Word not found
   return 0;
 }
 
@@ -92,7 +81,7 @@ int in_dict(char *word)
 
 void decryption(unsigned char key, unsigned char shift, const int *encrypted, int len, char *decrypted)
 {
-  for (int i = 0; i < len; i++)
+  for (int i = 0; i < len / sizeof(int); i++)
   {
     decrypted[i] = (encrypted[i] ^ key) >> shift;
   }
@@ -107,7 +96,7 @@ int message_score(const char *msg)
   // calculates the number of words in the message that are in the dictionary
   int score = 0;
   char *word;
-  char copy[MAX_WORD_LENGTH];
+  char copy[MAX];
   strcpy(copy, msg);
 
   // strtok takes a 'token' of msg based on the delim
@@ -121,7 +110,7 @@ int message_score(const char *msg)
       score++;
     }
 
-    word = strtok(copy, " ");
+    word = strtok(NULL, " ");
   }
 
   return score;
@@ -156,17 +145,22 @@ void search(const int *encrypted, int len, char *message)
 // return number of bytes read
 int read_encrypted(char *filename, int *encrypted)
 {
-  FILE *fp;
-  int bytes = 0;
-
-  // open the file for reading
-  fp = fopen(filename, "r");
-  while (fscanf(fp, "%d", &encrypted[bytes]) == 1)
+  int f = open(filename, O_RDONLY);
+  if (f < 0)
   {
-    bytes++;
+    perror("Cannot open encrypted file");
+    return -1;
   }
 
-  fclose(fp);
+  int bytes = read(f, encrypted, (MAX - 1) * sizeof(int));
+  if (bytes < 0)
+  {
+    perror("Error reading file");
+    close(f);
+    return -1;
+  }
+
+  close(f);
   return bytes;
 }
 
