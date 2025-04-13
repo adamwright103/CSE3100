@@ -74,9 +74,9 @@ void *SolvePuzzle(void *threadarg)
       if (cur + a[cur] >= 0 && cur + a[cur] < n)
       {
         // Fill in the code below
+        cur = cur + a[cur];
         my_data->b[my_data->moves] = cur;
         my_data->moves++;
-        cur = cur + a[cur];
       }
       else
       {
@@ -90,9 +90,9 @@ void *SolvePuzzle(void *threadarg)
       if (cur - a[cur] >= 0 && cur - a[cur] < n)
       {
         // Fill in the code below
+        cur = cur - a[cur];
         my_data->b[my_data->moves] = cur;
         my_data->moves++;
-        cur = cur - a[cur];
       }
       else
       {
